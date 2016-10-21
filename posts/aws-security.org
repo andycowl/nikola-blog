@@ -1,0 +1,91 @@
+#+BEGIN_COMMENT
+.. title: AWS security
+.. slug: aws-security
+.. date: 2016-03-09 11:02
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+#+END_COMMENT
+
+Aka *'DARK WEB HACKER COST ME $1600 SHOCK HORROR !'*
+
+After I set up my Jekyll site and uploaded the content to Amazon S3
+using '[[https://github.com/laurilehmijoki/s3_website][s3website]]', I remember thinking 'I must re-read that section
+about securing the configuration file with AWS credentials in plain
+text'.
+
+#+BEGIN_QUOTE
+  If the source code of your website is publicly available, ensure
+  that the s3website.yml file is in the list of ignored files. For git
+  users this means that the file .gitignore should mention the
+  s3website.yml file.
+#+END_QUOTE
+
+So, I duly added 's3website.yml' to .gitignore and pushed to GitHub. I
+wasn't sure whether this file exlcusion only took effect from now so I
+checked if the file was still in the repository. Unsurprisingly, it
+was but GitHub provided detailed [[https://help.github.com/articles/remove-sensitive-data/][instructions]] on how to resolve this.
+
+So, job done and as my AWS credentials were only exposed for 57
+minutes, no harm done.
+
+I went for lunch and returned to a voicemail from Amazon customer
+services asking me to contact them urgently about a 'security
+issue'. I also had an email and an AWS support case titled 'Your AWS
+account is compromised' describing, in detail, what corrective action
+I should take to promptly resolve the situation.
+
+My heart sank a little as I followed the instructions and examined the
+list of EC instances running. 'Hmm, that's strange, I don't remember
+setting up 10 instances called "Ghost" in every region...'
+
+I quickly terminated each instance and went to check my billing
+information. Phew. Usage for today was $0.00. Then I remembered a
+possible reason; in the dim and distant past, I experimented with a
+pre-built EC instance running [[https://ghost.org/][Ghost]]. Maybe that was the reason but,
+deep down, I knew this wasn't the case as they had all been started
+today and I don't think 'ghost' was referring to the blogging
+platform.
+
+Next I had to lockdown my AWS setup. First, although I already had a
+user account, I deleted the access [[http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html][keys]] associated with the 'root'
+account and changed my Amazon password. I also deleted the existing
+user and group, re-created them with new keys and followed the
+guidelines and best practice recommendations in the [[http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html][Identity and
+Access Management]] user guide.
+
+Then I enabled multi-factor authentication ([[http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html][MFA]]) for the AWS root
+account. This means that access is secured by the requirement to enter
+a 6 digit code from my mobile phone using Google [[https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2][Authenticator]].
+
+The following morning, I logged onto AWS and checked my bill. In a
+short period of time, the imposter had clocked up $1600 worth of
+charges despite Amazon locking down the account once they detected the
+compromise. I contacted Amazon customer support who said they would
+refund the excess charges due to this 'mishap' and would notify me
+once this was 'approved'. A little ambiguous but hopefully, I will get
+reimbursed although strictly speaking, this 'mishap' was down to my
+own stupidity.
+
+Finally, I did what I should have done in the first place and move the
+s3website configuration file elsewhere completely outside of the
+project directory and specify the location when sync'ing the site.
+
+#+BEGIN_EXAMPLE
+    $ s3_website push --config-dir ~/.s3_website
+#+END_EXAMPLE
+
+Otherwise, I can anticipate that if I change themes or platforms, I
+will repeat this idiotic error and Amazon may not be as understanding
+next time.
+
+Now, that it looks like the episode might be over, I am struck at how
+quickly Amazon detected the appearance of my AWS keys on GitHub. I
+presume they have a automated bot looking for this type of data so
+maybe it's not uncommon. Secondly, what benefit did the hacker gain ?
+
+He ran 40 EC instances for a while before being detected and
+shutdown. Why ? Just because he could ? In a way, I wish I'd more time
+to investigate precisely what was running on the instances.

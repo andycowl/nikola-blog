@@ -1,0 +1,26 @@
+#+BEGIN_COMMENT
+.. title: Code highlight example
+.. slug: code-highlight-example
+.. date: 2016-04-01 12:51:22 UTC+01:00
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+#+END_COMMENT
+
+This is the famous 'Hello world' program written in Python in colour.
+
+#+BEGIN_SRC python
+#!/usr/bin/env python
+import sys
+
+def hello(name='world'):
+    greeting = "hello " + name
+    print(greeting)
+
+if __name__ == "__main__":
+    hello(*sys.argv[1:])
+#+END_SRC
+
+This took me a long time to get working.

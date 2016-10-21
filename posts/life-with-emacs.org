@@ -1,0 +1,218 @@
+#+BEGIN_COMMENT
+.. title: life with Emacs
+.. slug: life-with-emacs
+.. date: 2016-10-21 14:25:09 UTC+01:00
+.. tags:
+.. category: emacs
+.. link:
+.. description: a life using Emacs
+.. type: text
+#+END_COMMENT
+
+* birth
+
+At the tantalising climax of the last [[http://www.yakshaving.co.uk/posts/life-before-emacs/][episode]], I was invited by Steve
+for a whistle-stop tour of Emacs.
+
+Steve explained that the main reason he used Emacs was pure
+laziness. Naturally, this immediately got my attention. He explained:
+
+'I'm lazy. It's not a fault. It's a fact. Most decent programmers are
+lazy. You're lazy'.
+
+'Hang on, just a minute ! What do you mean - I'm lazy ?'
+
+'Andy - you alias 'cd ..' to 'up' and 'l' to 'ls -ltr'. Just to save
+five characters typing. So don't tell me you're not lazy. Anyway, it's
+not a criticism'.
+
+'I used to work just like you. xterm open. Edit some C code. Compile
+the code. Fix the compilation errors. Repeat. Or search for a string a
+set of files using grep. Identify the file of interest. Goto
+line 723. Edit the file. That's what most programmers do. But when you
+think about it, it's a very inefficient process. All that typing, all
+that mouse movement, all that context switching. You may think having
+multiple xterm windows open solves it but it doesn't'.
+
+'In Emacs, we can do *all* of that processing within Emacs. Look'
+
+Steve then showed me the edit-compile-fix cycle in Emacs. This was
+fantastic. Edit the source code. Invoke make using 'M-x
+compile'. Review the errors in a separate buffer. Hit the compilation
+error and you're immediately positioned on the offending line in the
+source file.
+
+Similarly, for grep. Invoke search for 'parser' within all C and
+header files within Emacs. Then select the occurrence of interest and
+you're immediately taken to the source file at the right place. No
+more 'grep -n' and jotting down the line number.
+
+The other biggest advantage Steve showed me was perhaps more basic and
+fundamental; simply the use of multiple buffers and 'C-x C-b' to
+manage the buffer list.
+
+Previously, I would use multiple 'vi' sessions or ':n' to edit the
+next file in the list or toggle between two files using ':e #'. Worse,
+I thought that was advanced wizardry.
+
+Steve also showed me the Emacs directory editor (dired) whch was
+impressive and a very quick way of navigating around the Unix file
+system.
+
+* childhood
+
+And thus, my life using Emacs started in 1992. Initially, I was
+delighted enough with just this basic Emacs functionality as a great
+improvement over my previous approach.
+
+However, I wasn't converted into an evangelist preacher from day
+one. I still used the 'elm' email client in a terminal window and 'rn'
+to read Usenet.
+
+Also, I can admit this now. I would frequently fire up 'vi';
+specifically for any global search and replace operations as it was
+just simpler and quicker than me trying to learn and master the Emacs
+equivalent.
+
+Then I got moved to an OS/2 project but, Emacs was available for that
+now dead IBM platform so I copied my .emacs file and was happy.
+
+Once, I got sent to Boston (America not Lincolnshire) to fix a tricky,
+long-standing problem. I was instructed to take the source code with
+me, given an open return ticket and was told to stay onsite until it
+was resolved. Fortunately, it transpired to be a one-liner involving a
+subtle race condition. Unfortunately, I fixed it on a Saturday and it
+was a public holiday weekend which meant I now had a lot of free time
+on my hands.
+
+I remember sitting in the client's empty offices, revisiting the Emacs
+tutorial and really taking the time to read and understand it fully. I
+spent a lot of time experimenting and trying out all the features
+including stuff I never used, failed to understand or had simply
+forgotten about.
+
+Even now, I still enjoy reading or watching Emacs tutorials to see how
+other people use it. Or maybe I'm just weird.
+
+* teenage years
+
+In 1996, I took a job at Sequent who produced high end, expensive,
+fast, parallel processing, NUMA based Unix servers. Although I was now
+working in a Unix environment again, the DYNIX/ptx operating system
+wasn't the ideal development environment as a lot of my preferred
+tools, packages and utilities either weren't available or hopelessly
+out-dated and buggy.
+
+However, the GNU C compiler was available so I embarked on building a
+lot of the GNU packages. This was a useful and instructive exercise
+as, occasionally, changes to the source code were needed to build
+cleanly - normally the addition of a '#ifdef ptx' macro.
+
+Of course, inevitably there was a modicum of yak shaving involved
+here. For example, I had successfully built Emacs from source but it
+didn't interact properly with the brain-dead ptx version of 'grep'. So
+then I had to go and build grep which needed flex which needed...
+
+* honeymoon period
+
+During this time, I was being slightly more inquisitive about
+extending my use of Emacs. I converted to ViewMail (VM) within Emacs
+to read my email and Gnus for reading Usenet news groups. I remember
+thinking that VM wasn't too far removed from 'elm' on an xterm.
+
+I liked Gnus. A lot. I simply loved the Gnus manual which is
+undoubtedly the best software manual ever written. I was using
+adaptive scoring, threading and marks but still, I suspect I was (and
+am) merely scratching the surface of what Gnus is capable of.
+
+I used the Insidious Big Brother Database (BBDB) as an address book
+for both VM and Gnus and I started to realise that 'ange-ftp' was much
+better than remotely logging into various Unix servers where 'vi' was
+the only option for editing files.
+
+I discovered XEmacs looked prettier and had more packages available so
+I turned to that. Plus I liked Jamie Zawinski's style,.
+
+Then I was forced to leave the comfort of my office based job, was
+given a Windows laptop and told to go and work in London on an Oracle
+data warehouse project. I might have done something awful or insulted
+my manager at the Christmas office party. I can't quite recall.
+
+* mid-life crisis
+
+Naturally, Emacs on Windows was available but it wasn't like the real
+thing. Without a Unix environment, even Emacs couldn't mask the many
+deficiencies and limitations of using a Windows laptop as a, err,
+development environment although I later discovered Cygwin which eased
+the pain (just a little).
+
+To compound the agony, I was now reading and writing a lot of
+documents in Microsoft Word and I needed to accept meeting invitations
+in Microsoft Outlook.
+
+It was now 1999 and the dot com boom was well underway so I decided to
+join a small startup as an Oracle DBA/developer. This was a slightly
+unusual environment; well, in fact, there was no development
+environment. It was my job to create one without spending any money
+(if possible). That was great so we soon had Oracle databases running
+on Linux servers which doubled as our development machines.
+
+This happy state of affairs lasted for four years until I moved on to
+a technical consultancy where I enjoyed some challenging work,
+troubleshooting tricky (and some trivial) problems at call centres
+located across Europe. My modus operandi now was (don't laugh here)
+was to make copious jottings in Notepad during meetings, phone calls
+and while I worked. When I returned home, I collated the notes into a
+lengthy Word document.
+
+During this period, I talked to a lot of taxi drivers, visited a lot
+of sports bars and sat in countless anonymous airport lounges but I
+didn't even install Emacs, let alone celebrate of the arrival of a
+long-awaited package manager.
+
+* rejuvenation
+
+In 2011, after some enforced sick leave, I returned to work and
+transferred to a role in product development. This was great because
+my enlightened employer allows me to use Linux on my work
+computer. OK - it's Oracle Linux and you may scoff - but it's Linux
+and I can run the latest version of Gnome, the email client of my
+choice and am able to install all my favourite packages. And still get
+support from IT.
+
+Why - now I've got WebEx working and my enlightened colleagues use
+Wikis, I don't even have to fire up my contingency Windows Virtual
+Machine any more.
+
+Bizarrely, history repeated itself and I found myself firing up a lot
+of terminal windows and multiple 'vi' sessions which was where this story
+originated.
+
+Funnily enough, when I realised I was spending an increasing amount of
+time editing source code, I looked at what editors were out there. I
+looked at Sublime Text (commercial) and then at Atom (GitHub's
+excellent offering) which included many (over 5,000) plugins to
+support language formatting, colouring, compilation, search, ssh...
+
+But wait, hang on a minute. I had invested a lot of time and acquired
+a lot of knowledge about a powerful text editor that could do all of
+this and more.
+
+That's when I revisited Emacs. This time, I endeavoured to go even
+further and attempted to use Emacs for everything. Well, everything
+apart from a Web browser, SQL developer and LibreOffice.
+
+Now I use the Prelude starter kit which is excellent coupled with the
+stylish monokai theme. I use Gnus and BBDB for email, news and RSS
+feeds. I use Python and the SQL modes extensively.
+
+However, the biggest and most interesting addition to Emacs since my
+departure is the much lauded (and deservedly so) org-mode
+package. After a few false starts, I am now using org-mode for note
+taking, blogging, managing my calendar and ToDo's (my work and Google
+calendars are sync'ed using vdirsyncer). I recently ditched Pidgin in
+favour of the Emacs Jabber package.
+
+* Nirvana
+
+Finally, I configured $EDITOR and alias'ed 'vi' as 'emacsclient'.

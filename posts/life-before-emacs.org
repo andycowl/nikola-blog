@@ -1,0 +1,103 @@
+#+BEGIN_COMMENT
+.. title: life before Emacs
+.. slug: life-before-emacs
+.. date: 2016-09-02 17:09:45 UTC+01:00
+.. tags:
+.. category: emacs
+.. link:
+.. description: My experience of editors before Emacs
+.. type: text
+#+END_COMMENT
+
+* the early years
+
+** 1962
+
+Entered the world as I intend to leave it. Kicking, screaming, naked,
+held upside down by a nurse slapping me on the backside.
+
+* a night at the Lesser Free Trade Hall
+
+** 1977
+
+Wrote my first basic program in BASIC on a Tandy TRS-80. Editing
+facilities were fairly limited. I think to modify Line 10, you had to
+simply re-enter Line 10. In its entirety. This was rather time
+consuming, tiresome and almost put me off computers for life.
+
+#+BEGIN_SRC
+10 PRINT "DR. HANDS IS A RUBBISH TEACHER"
+20 GOTO 10
+#+END_SRC
+
+These lunchtime sessions also taught me how to interrupt a BASIC
+program rapidly. Useful, particularly when the physics teacher,
+Dr. Hands, made an unexpected return to the lab.
+
+* losing my religion
+
+** 1981
+
+At Warwick University, the Computer Science lab was equipped with green VT-100
+terminals hooked up to a PDP-11. Warwick was where I was introduced to C
+programming and forcibly indoctrinated into the '[[https://en.wikipedia.org/wiki/Vi][vi]]' text editor. I remember
+thinking it was handy that [[https://en.wikipedia.org/wiki/Rogue_(video_game)][Rogue]] used the same key bindings for 'up', 'down',
+'left' and right'.
+
+** 1984
+
+I left the confines of my room and went on the milk round. Instead of
+coming back with a pint of silver-top, I somehow managed to land a job
+with a software house as a 'Junior Programmer' and started work on a Unix
+project using 'vi' and state of the art amber VT-100's.
+
+* a short stay in purgatory
+
+** 1986
+
+Reallocated to a project on [[https://en.wikipedia.org/wiki/OpenVMS][VMS]] where I was forced to use a
+bewildering command syntax and a limited, primeval text editor called
+[[https://en.wikipedia.org/wiki/EDT_(Digital)][EDT]] that made extensive use of the numeric keypad.
+
+Later, I was made aware of an alternative editor called EVE. Better
+still, EVE was actually built using an extensible TPU (Text Processing
+Utility) library for VMS. Joyously, I discovered some clever person
+had built a 'vi' clone using TPU. It took me 3 days and cost me £79 to
+download the software over a 2400 baud modem but it was worth it.
+
+* New Dawn Fades
+
+** 1988
+
+Left permanent employment and became a freelancer. My nightmares about
+the DIRECTORY/SIZE command subsided as did my repetitive strain
+injury. I now found myself porting an Ada compiler from a mainframe
+system to Unix, reunited with a decent editor, short commands and
+the joys of pipelining.
+
+* the road to salvation and true enlightenment
+
+** 1992
+
+Started work for a relational database company. On day one, after
+coffee and introductions, I was offered the choice of a Sun
+workstation or 'as you've used VMS a lot, you'd probably prefer this
+DEC Workstation'. I forcefully elected the sensible option, held up a
+crucifix and threw some garlic cloves in the direction of the
+VAXStation. I claimed I'd used a Sun workstation for many years (a
+lie) and had to surreptitiously watch my neighbour to learn how to
+manage X Windows.
+
+I sensed my colleague was slightly suspicious but he had a beard and a
+pony-tail and was quiet but helpful. I noticed that while I had my
+screen divided equally into 6/8/10 equal sections each running an
+xterm, his large monitor simply displayed had a background of the
+Monty Python 'dead parrot' sketch and a single application taking up
+90% of the monochrome screen estate.
+
+'What is that program you're using to edit files, Steve ?'
+
+The man with the beard and the pony tail swiveled in his chair and
+uttered the immortal words
+
+'It's called Emacs. Do you want to see how I use it ?'

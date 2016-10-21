@@ -1,0 +1,47 @@
+#+OPTIONS: ^:nil
+#+BEGIN_COMMENT
+.. title: optimising Emacs and elfeed
+.. slug: optimising-emacs-elfeed
+.. date: 2016-04-28 09:58
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+#+END_COMMENT
+
+I recently had to re-install my work laptop with Oracle Linux 7. With
+backups, it didn't take too long to reinstall. The most time consuming
+task was compiling Emacs 24.5 from source. Emacs 24.5 is required for
+the excellent [[https://github.com/bbatsov/prelude][Prelude]] starter kit I have recently adopted. There are a
+lot of pre-requisite packages for Emacs that are available (but not
+included) in Oracle Linux 7.
+
+As part of the 'Emacs for Everything' experiment, I have also started
+to use an Emacs package called '[[https://github.com/skeeto/elfeed][elfeed]]' to read RSS feeds and while it
+worked in my new, shiny environment, I noticed it ran much slower then
+previously. I tracked this degradation to the fact that OL7 ships with
+a dated versionn of '[[http://www.gnutls.org/][GnuTLS]]' (3.3.8 released in September 2014)
+whereas the latest version is 3.4.9 (released in February 2016).
+
+As GnuTLS is a secure transport communications layer, I decided to
+upgrade it and recompile Emacs including the updated libraries as I'd
+done before.
+
+Usually, I remove the bundled software package using yum and install
+the new version from source in '/usr/local'. However, in this case,
+lots of packages depend on GnuTLS including fundamental ones like
+Gnome 3 so I had to leave the existing package alone.
+
+Inevitably, since I last built it, the GnuTLS package had been updated
+and now depended on a crypto package called [[https://www.lysator.liu.se/~nisse/nettle/Nettle][Nettle]] that was installed
+but version 2.x. More yak shaving ensued involving 'pkgconfig' and
+LD_LIBRARY_PATH but finally I was able to build Emacs using the latest
+version of GnuTLS.
+
+I was rewarded by 'elfeed' performance reverting to its previous
+stellar levels. elfeed fetches feeds in parallel and is very fast. It
+takes less than 20 seconds to update my 150 feeds and the keyboard
+interface enables me to process feeds very quickly compared with a Web
+interface like [[http://feedly.com/][Feedly]] although the latter does sync between multiple
+platforms.

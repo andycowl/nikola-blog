@@ -1,0 +1,29 @@
+#+OPTIONS: ^:nil
+#+BEGIN_COMMENT
+.. title: extending Bash history
+.. slug: extending-bash-history
+.. date: 2016-08-27 14:26
+.. tags: emacs bash history
+.. category: emacs
+.. link:
+.. description: extend bash command history
+.. type: text
+#+END_COMMENT
+
+I have used the Unix [[https://www.gnu.org/software/bash/][bash]] shell for many years. As I am incredibly lazy and
+forgetful, I have become accustomed to using ctrl-r 'find' to find and scroll
+though the latest 'find' commands I have issued.
+
+Occasionally, I noticed that a lengthy, complex, useful 'find' command' (which I
+mercilessly plagiarised from a clever person via Google) was no longer in my
+shell history.
+
+Investigations revealed the default bash history is a paltry 1000 commands so I
+decided to increase this to 10000 by adding the following line to
+'~/.bash_profile'.
+
+#+BEGIN_SRC sh
+HISTFILESIZE=10000
+#+END_SRC
+
+After all, disk space is much cheaper than my time.

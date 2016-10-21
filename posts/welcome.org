@@ -1,0 +1,15 @@
+#+BEGIN_COMMENT
+.. title: Welcome
+.. slug: welcome
+.. date: 2016-03-04 15:37
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+#+END_COMMENT
+
+Welcome...to the atrocity exhibition.
+
+Fittingly, this site is powered by Jekyll and Github pages, but the precise
+details will probably take a series of 1,739 posts.

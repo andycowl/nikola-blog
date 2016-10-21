@@ -1,0 +1,15 @@
+#+BEGIN_COMMENT
+.. title: GIT tutorial for SVN users
+.. slug: git-tutorial-svn
+.. date: 2016-03-08 12:32
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+#+END_COMMENT
+
+I have used CVS and then [[https://subversion.apache.org/][SVN]] for version control. As I now use [[https://github.com/][GIT]] for
+a couple of projects, I found this set of GIT [[https://www.atlassian.com/git/tutorials][tutorials]] very useful as
+they are well-written, use plenty of examples and outline where and
+how GIT differs from Subversion.

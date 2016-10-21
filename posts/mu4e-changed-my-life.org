@@ -1,0 +1,181 @@
+#+BEGIN_COMMENT
+.. title: how mu4e changed my life
+.. slug: mu4e-changed-my-life
+.. date: 2016-03-23 11:57:11
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+#+END_COMMENT
+
+* Getting email
+
+No mail. In three whole days. Weird. I wonder if it's Thanksgiving
+over in the States. Not even any football related banter. Is this
+thing even on ?
+
+Then I realised precisely why I was sitting alone in an island of
+blissful isolation, devoid of all email communications and staring at
+an Inbox in a perpetual state of 'Zero'.
+
+I had forgotten to configure inbound email.
+
+When I was testing, I used [[http://isync.sourceforge.net/][mbsync]] to synchronise emails from my ISP
+which worked well (fast, reliable, well documented) with
+bi-directional sync between IMAP and my local Maildir.
+
+Note: For Linux types, the 'mbsync' utility is contained within the
+'isync' package.
+
+My needs at work are slightly different though. We use IMAP but are
+encouraged to download and work locally. This corporate edict is
+implicitly enforced by configuring users' IMAP folders with a measly
+1GB quota.
+
+Using [[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]], I needed to fetch new messages from the IMAP server,
+transfer them to ~/Maildir and then delete them from the IMAP
+server. Although mbsync has 'push', 'pull' and 'expunge' options, it
+wasn't entirely clear (to me) if removal of messages from the server
+was possible. However, the [[http://pyropus.ca/software/getmail/][getmail]] utility written in Python met the
+requirements exactly and was easy to configure.
+
+Previously, I used Thunderbird to get new messages from IMAP, filter
+them at source and transfer them directly to various 'Local
+Folders'. The filtering was pretty basic - typically mailing lists and
+routing corporate communications to /dev/null.
+
+I tended to configure mailing list folders with a retention period of
+30 days and retain 'Starred' messages for ever. Essentially, this
+meant mailing list traffic didn't clutter my precious Inbox and would
+automatically expire. I then had a full month to scan the mailing
+lists and mark any interesting messages for further reading or more
+unlikely in my case, action.
+
+Anything left over simply came to Inbox. This was normally email
+directed (To: or CC:'ed to me) so this system worked pretty well.
+
+* Sending email
+
+Sending email is easy - mu4e sensibly uses Gnus message mode to send
+messages. I also built the latest version of [[http://msmtp.sourceforge.net/][msmtp]] from source for
+future flexibility (multiple account support) and it seemed marginally
+quicker than talking directly to the SMTP server.
+
+* Reading email
+
+Initially, I didn't like the mu4e initial screen. Where's my Inbox ?
+Where's my new messages ? I need to see my new emails and start
+working, dammit !
+
+Then, to my horror, I realised mu4e doesn't have an Inbox per se -
+just a list of email messages that sit in ~/Maildir. Unread messages
+reside in '/new' and read messages live in '/cur'.
+
+I was immediately annoyed at a plethora of irrelevant mailing list
+messages and corporate communications littering my Inbox - sorry
+littering my 'List of unread messages'.
+
+God - this is terrible. I can see that the only solution here is for
+me to shave that yak again and configure [[https://en.wikipedia.org/wiki/Procmail][procmail]] or use [[http://sieve.info/][Sieve]] and
+[[http://dovecot.org/][Dovecot]] merely to mimic what I had working fine in Thunderbird out of
+the box.
+
+Then I saw a post from Dirk (mu4e's author) on the mu4e
+[[https://groups.google.com/forum/#!forum/mu-discuss][mailing list]]
+
+#+BEGIN_QUOTE
+'mu4e doesn't really have folders - instead "All Mail", "Inbox",
+"Important", "Sent Mail" etc. are queries - so the same messages can
+XFbe present in more than one of those'.
+#+END_QUOTE
+
+Then it struck me like a bolt of lightning. He was absolutely right. I
+don't need a 'Corporate' folder. I don't need a stupid
+'Oracle/MailingLists/dba-wizards' folder with a 3 level hierarchy. I
+don't even need an 'Inbox'.
+
+What I need is a set of queries to mine the database. Yes - a set of
+structured text files is in fact a database. mu4e calls these queries
+'bookmarks' and provides some useful ones out of the box.
+
+- bu (unread messages)
+- bw (messages sent in the last week)
+- bp (message with attachments)
+
+Then I would need some ad-hoc or stored queries (e.g. large
+messages). For example, if I wanted to find that excellent email from
+Frank about table partitioning he sent out last year:
+
+- contact:oracle-dba-wizards from:frank date:2015 partitioning
+
+The 'Inbox' processing now changes slightly. I needed to read each
+unread message and quickly decide what to do with it:
+
+- Delete it. 'Blue Nova with lights on in car park 710 East'
+- Act on it. Do something. Or reply. Then (optionally) delete it.
+- Mark it for (later) 'Action'. Absolute last resort. Obviously.
+- Archive it. Something potentially interesting but not now.
+
+Then I remembered that this tied in nicely with an post by Ben Maughan
+on his excellent Pragmatic Emacs [[http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/][blog]] which made me question the need
+for a 'ToDo' folder. Or any folders, in fact.
+
+#+BEGIN_QUOTE
+'I also had folders for putting emails in and I would occasionally
+have a painful cleanout of my towering inbox, agonising over which
+folder to put an email in, or whether I should create a new folder for
+it'.
+#+END_QUOTE
+
+Then something else struck me. Joking aside, it was quite pleasant and
+liberating when I had no incoming email. The fact I didn't have a
+cluttered Inbox presented by default, staring me in the face was
+great. I had to make a conscious effort to get new mail ('U') and I
+then had to make a conscious effort to read it 'b u').
+
+Initially, I explicitly disabled periodic automatic fetching of new
+email (as I had configured in Thunderbird) so I could verify getmail
+was fetching (and deleting) the correct number of messages from the
+server and attachments were being handled correctly. However, I
+decided to stick with manual email processing initiated by me when I
+was ready to process email. Notifications of 'new email' are
+incredibly hard to ignore and a needless context switch if you are
+busy concentrating on something else (watching Shetland ponies dancing
+on YouTube).
+
+* Further thoughts
+
+Now I am wondering what the point of all my historic folders are;
+archives by year, mailing lists, personal, sent etc. Previously, in
+Thunderbird, they were logical groupings and I viewed annual archives
+as 'read-only' but now in the new scheme, they are merely entries in a
+database and strictly speaking every single message belongs in
+'~/Maildir' for simplicitly. With one file per message, there is no
+longer any advantage in logical folders.
+
+So yes, I must be the only person in the world who intentionally went
+from 'Inbox Zero' to 'Inbox 47,339' and didn't care.
+
+Also, inevitably, I am now being increasingly tempted by the lure of
+[[http://orgmode.org/][org-mode]]. In particular, Ben's quote struck a chord with me.
+
+#+BEGIN_QUOTE
+'your inbox is not a todo list'
+#+END_QUOTE
+
+This is so true and something I have been abusing for years. An email
+message doesn't have a start date, an end date, a category, a priority
+or a current status whereas org-mode supports all of those elements.
+
+In addition, org-mode [[http://blog.gabrielsaldana.org/quick-note-taking-with-emacs-and-org-capture/][capture]] takes this further. You can capture
+anything from any source; an email message, a Web site, a phone call,
+an instant message, a news article, a blog post, anything.
+
+* Configuration
+
+A lot of people conclude and help the reader by including their
+'gnus', 'mu4e', 'msmtp' and 'getmail' configuration files but mine are
+simply variants on the many excellent, annotated examples out there
+and I'd only repeat an idiotic mistake and post something crucial and
+security related in clear text on the Internet.

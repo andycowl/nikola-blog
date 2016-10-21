@@ -1,0 +1,23 @@
+#+BEGIN_COMMENT
+.. title: from GitHub pages to Amazon S3
+.. slug: from-gh-pages-to-s3
+.. date: 2016-03-07 16:40
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+#+END_COMMENT
+
+Although hosting on GitHub pages is an excellent option, I decided to
+move this blog to Amazon [[https://aws.amazon.com/s3/][S3]], mainly because I have used S3
+before. Also GitHub pages only supports a limited set of Jekyll
+[[https://help.github.com/articles/adding-jekyll-plugins-to-a-github-pages-site/][plugins]] and I wanted more flexibility to add any plugin and
+(potentially) run a different version of Jekyll.
+
+I also took the opportunity to switch the theme to the rather
+minimalistic but stylish [[http://getpoole.com/][Poole]] and installed the useful [[https://github.com/laurilehmijoki/s3_website][s3website]]
+utility to automatically synchronise the static site to amazon S3. As
+you are charged for upload/download traffic, an intelligent sync
+process (rather than uploading everything) for deployment is
+important.

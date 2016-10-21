@@ -1,0 +1,160 @@
+#+OPTIONS: ^:nil
+#+BEGIN_COMMENT
+.. title: adventures with FreeNAS
+.. slug: adventures-with-freenas
+.. date: 2016-06-24 12:07
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+#+END_COMMENT
+
+I had been contemplating and researching the purchase of a dedicated
+Network Attached Storage (NAS) for a long time. Initially, I
+considered a few different options; an entry level unit like a
+Synology DiskStation, a small server like the HP Gen 8 Microserver or
+Dell T20 and installing the disks or even buying the individual
+components and building the unit myself.
+
+However, I'm pretty useless with hardware and as a NAS should be high
+quality, reliable and solid, I decided to purchase a ready made unit.
+
+I decided I wanted something that could run [[http://www.freenas.org/][FreeNAS]] with ZFS rather
+than some proprietary GUI and I found a lot of helpful advice on the
+FreeNAS [[https://forums.freenas.org/index.php][forums]].
+
+My main requirements were basic and standard for a home user:
+
+- Automated reliable backup of photographs, music, DVD's, home videos
+  and documents.
+- Ability to run [[https://www.plex.tv/][Plex Media Server]] (2-4 concurrent users with
+  transcoding). This requirement eliminates a lot of the cheaper NAS
+  units with slow processors.
+- Potential to perform backups to cloud storage (Amazon Glacier).
+
+IXsystems sell ready made FreeNAS [[https://www.ixsystems.com/freenas-mini/][units]] but they are relatively
+expensive and I would have to pay shipping to the UK so I started to
+look for a UK supplier.
+
+After procrastinating, delaying, repeatedly shelving then resurrecting
+the idea and trying to justify the cost, not for the first time, my
+wife tipped me over the edge. She dropped her laptop. Nothing unusual
+about that. She'd dropped it before and I paid a man with a soldering
+iron to replace the power supply jack.
+
+This time, she'd broken it completely so it was (almost) cheaper to
+replace the laptop than fix it. Like many personal users, my backup
+strategy wasn't exactly non-existent but certainly sub-optimal. I had
+photos burned to miscellaneous CD's, I had various photo albums
+uploaded to Flickr and Google. Obviously, I had all my work data
+backed up (CrashPlan at work, external USB drive at home). My entire
+music collection (ripped to lossless FLAC) was also backed up three
+times. As for the wife's laptop, well, I had an three month old backup
+from the last time I restored the laptop coupled with her important
+documents safely backed up on a USB stick. Which was missing.
+
+I could have probably re-assembled and recovered 98% of everything
+that was crucial and written off the gaps but for one, important,
+irritating factor. My wife is studying for a course and she had very
+recent notes, jottings and drafts of essays on her laptop. Inevitably,
+none of these were backed up anywhere.
+
+I gave her her 5 year old workhorse laptop back, got her email
+working, restored her Firefox bookmarks and reassured her I would
+retrieve last night's draft of her essay, err, shortly.
+
+I had already had to pay computer repairman £50 just to tell me the
+laptop was beyond economic repair and now my misery was compounded as
+I had to shell out another £99 for 'data recovery'. I knew this simply
+meant hooking up the disk drive to another computer and pressing
+'Copy' but that's the price you pay for being a idiotic cobbler with
+holes in his shoes.
+
+Thankfully, he managed to retrieve everything - the media library I
+already had as well as the important documents for the wife.
+
+This episode gave me the impetus and justification to go ahead and
+purchase a NAS and get a proper backup strategy in place.
+
+I decided to purchase a [[http://www.powernas.co.uk/for-home/mini-freenas/][Mini FreeNAS]] from a UK company called [[https://www.servercase.co.uk/][Server
+Case]] who offered pre-built NAS units meeting all the recommended
+hardware specifications together with the latest version of FreeNAS
+(9.10) installed. The basic model came with 4 disk bays and 8GB of ECC
+RAM so I configured a [[https://www.servercase.co.uk/shop/server-solutions/nas-servers/desktop/powernas---mini-home-server---cma---4x-3tb-12tb-pn-cma-12tb/][system]] with 4 x 3TB WD Red disks and upgraded
+the memory to 16GB.
+
+The technical support from Server Case was excellent and helped me
+customise the system and answered all my newbie questions fully and
+promptly. Each unit is assembled to order and the hardware stress
+tested but even so, the package was delivered within three days.
+
+I unpacked the large, well packed, cardboard box and although I had
+measured the dimensions, I was immediately impressed with size and
+appearance of the unit, the modern, stylish black case and the build
+quality which seemed very professional and solid.
+
+I powered the unit up and heard the disks spin up and blue lights come
+on. You are supposed to hook up a monitor during installation but I
+didn't have a VGA cable handy so I just plugged it into the router and
+determined the IP address so I could login to the FreeNAS
+Administration interface and configure the system.
+
+I had already decided to configure the four disks in a RAID-Z2
+configuration which meant two redundant disks giving me usable space
+of 6.1TB. As the sum total of everything I currently own is just over
+1TB, this was more than adequate and hopefully future proof.
+
+I found the FreeNAS Web admin interface easy to use and I quickly
+setup NFS shares and got clients working on my various Linux
+laptops. I also enabled ssh so I could login remotely to access the
+FreeBSD command line.
+
+FreeNAS includes a number of plugins for popular packages including
+Plex but I decided to create a jail manually and install it which
+worked fine.
+
+Then I configured periodic SMART disk tests to check the integrity of
+the disks and ZFS filesystem as well as a regular backup of the
+FreeNAS configuration database.
+
+I migrated all my data simply by rsync'ing to the NFS filesystems over
+my wireless network. With hindsight, this was not the quickest way to
+do it - a wired connection directly into the router would have been
+much quicker but it chugged away, was resumable and did the job.
+
+I then degraded the FreeNAS performance still further by moving the
+NAS out of the bedroom, away from the router and into a spare bedroom
+using TP-Link Powerline adapters to simulate a wired connection. [ I
+relocated the NAS as it was quiet but hummed slightly in our bedroom
+and the air ventilation wasn't great as it was rather cramped sitting
+adjacent to the router. ]
+
+Inevitably, I then spent a lot of time playing with my new toy. I
+experimented with all the available plugins, installed a load of
+software and I learned a little about FreeBSD and jail management.
+
+For the backups, I decided on a pretty simple strategy. I created
+hourly cron jobs which executed on the FreeNAS server and pulled files
+to the FreeNAS using rsync (but didn't sync deleted files). If a
+client was unavailable, the rsync was skipped.
+
+Then I created ZFS snapshots (hourly snapshots retained for 24 hours,
+daily snapshots retained for a week, weekly snaps retained for a
+month, monthly snaps retained for a year).
+
+This was adequate but the spectre of my wife losing 59 minutes of work
+on her essay still haunted me so I installed DropBox to perform
+real-time backups to the cloud (aka someone else's server) and after
+looking at many options installed a wonderful open source backup
+utility called [[https://syncthing.net/][Syncthing]] in another dedicated jail.
+
+Syncthing is similar to dropbox but uses a notifier utility to detect
+changes on the filesystem which trigger an efficient, incremental
+backup when changes are made rather than polling regularly. Syncthing
+also supports multiple clients (N-way replication) and can also
+perform one-way sync (master-slave) which is what I required.
+
+In conclusion, I am very pleased with my purchase and FreeNAS setup
+now. There's something pleasing about having a home server hidden, out
+of sight, always on, with an uptime of 67 days 17 hours and 3 minutes.

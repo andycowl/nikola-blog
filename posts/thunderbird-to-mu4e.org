@@ -1,0 +1,124 @@
+#+BEGIN_COMMENT
+.. title: from Thunderbird to mu4e
+.. slug: thunderbird-to-mu4e
+.. date: 2016-03-16 15:52
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+#+END_COMMENT
+
+One of the best things about my job is that you can are free to use
+Linux and any email client you please. I use [[https://www.oracle.com/linux/index.html][Oracle Linux 7]] and
+[[https://www.mozilla.org/en-US/thunderbird/][Thunderbird]] on my Lenovo T420 laptop.
+
+Over the years I have used a variety of email clients. When I was
+compelled to use a Windows machine, I was normally forced to use
+Outlook or Thunderbird (if possible). Between 1996 and 2003, I used
+[[https://www.gnu.org/software/emacs/][Emacs]] and [[http://www.gnus.org/][Gnus]] which was pretty unusual and perplexed many colleagues.
+
+I really loved Gnus as I already used it to read Usenet newsgroups
+(remember them ?) and it just seemed like a completely natural
+extension to use the same interface to rapidly consume and compose
+email. Also, it has the most brilliant, funny and entertaining
+computer [[http://www.gnus.org/manual.html][manual]] ever written courtesy of [[http://lars.ingebrigtsen.no/][Lars]] Magne Ingebrigtsen.
+
+Once, when invited by my employer to 'Make a difference' in a crowd
+sourced effort to reduce inefficiency and improve profitability, I
+suggested that we convert all internal forums and mailing lists to
+internal newsgroups hosted on a central NNTP news server. I once read
+that a single email cost a company ten cents. While this doesn't sound
+a lot, calculations showed that for 3,500 employees and 500 mailing
+lists, this figure soon grows exponentially.
+
+How much easier for everyone to read corporate edicts or technical
+forums from a central server. Anyway, the powers that be didn't choose
+to dignify my proposal with an acknowledgement, still less a reasoned
+response. Still, I had the last laugh, they filed for bankruptcy two
+years later citing an 'large, unwieldly, unscaleable and prohibitively
+expensive email infrastructure'.
+
+Anyway, I digress slightly. I happily use Thunderbird with the
+[[https://www.mozilla.org/en-US/projects/calendar/][Lightning]] calendar extension which all works fine.
+
+Then I saw a YouTube talk about the [[https://www.youtube.com/watch?v=pBs_P_1--Os][Notmuch]] email client which looked
+like a stripped down attempt to emulate GMail with a terminal based
+interface where labels are applied to messages, messages are never
+deleted and powerful, accurate, fast searching is key.
+
+This set me thinking (always dangerous). Email is a key element of my
+working day; I spend a significant proportion of my time processing
+email. Why I don't revert to an Emacs email client so I can read and
+send emails from the one true editor instead of constantly context
+switching ?
+
+I researched [[https://notmuchmail.org/][Notmuch]] a little more. I liked the fact it was simple and
+expressly de-coupled from the other email components - 'do one job, do
+it well'. Notmuch doesn't collect email from the server nor does it
+send email. Notmuch simply indexes the email and searches it -
+quickly.
+
+I soon encountered another similar, bare-bones, stripped down mail
+indexing tool with an emacs client that was getting lots of positive
+reviews - [[http://www.djcbsoftware.nl/code/mu/][mu4e]].
+
+I always maintain you can't solely rely on reviews as that relies on
+other people. Despite being innately lazy, you really have to try
+software for yourself and live with it for a period to fully evaluate
+it so that's what I decided to do.
+
+Firstly, I discovered that these mail indexers prefer [[https://en.wikipedia.org/wiki/Maildir][Maildir]] format
+which uses a file for each individual message whereas Thunderbird uses
+a single [[https://en.wikipedia.org/wiki/Mbox][mbox]] file per folder. Funnily enough, that explained my
+backups constantly transfer a large, monolithic 'Sent' mailbox file
+when only a couple of new messages had been added.
+
+So the first problem was to convert all my Thunderbird 'Local
+Folders', spanning 13 years, to Maildir format. No problem, it's a
+common issue and there were a plethora of mbox to maildir [[http://www.qmail.org/top.html#usersoft][converters]]
+available.
+
+However, a lot of these utilities were ancient, broken or obsolete. I
+had various errors; silent failures, compilation errors, date parsing
+problems, incomplete conversions, seemingly random failures. Clearly
+all the clever people migrated to Maildir a long, long time ago.
+
+There was a promising import/export [[https://addons.mozilla.org/en-US/thunderbird/addon/importexporttools/][extension]] for Thunderbird that had
+a tantalising Changelog entry referring to Maildir format but that
+also proved to be a non-starter.
+
+The idea had now been seeded so I certainly wasn't going to be
+deterred by having a mere 49,339 email messages in the incorrect
+format. I saw a blog post detailing how to use the open source [[http://dovecot.org/][Dovecot]]
+Mail server to convert email between a variety of different formats.
+
+The dovecot package was in the OL7 repos and it was trivial to
+configure a local IMAP server. Then I simply copied each Thunderbird
+folder to a newly created, local IMAP account which created the
+messages in Maildir format. This was very fast and meant I could
+easily check the number of converted messages was correct both in
+Thunderbird and on the file system.
+
+I kept the legacy email and Dovecot around as it was useful for
+reconcilation and testing purposes and represented the fallback plan
+if I subsequently needed to revert to Thunderbird. Although
+Thunderbird appears to have embryonic, experimental [[https://wiki.mozilla.org/Thunderbird/Maildir][Maildir]] support,
+there are some pretty dire warnings such as:
+
+#+BEGIN_QUOTE
+  'HOWEVER, note this is NOT full maildir in the sense that most people,
+  particularly linux users or mail administrators, know as maildir. You
+  cannot point a Thunderbird account to a mail server directory. You do
+  not get message flags stored with emails. You only get a single file
+  per message, and nothing more'.
+#+END_QUOTE
+
+So that was that - although this quick, fun, post-lunch task took
+slightly longer than originally anticipated, now I had successfully
+migrated all my email to mu4e.
+
+[[https://lh3.googleusercontent.com/-1vhSea6bwwM/VumCo6CEzfI/AAAAAAAAB7M/9yZ8Sig6YN8Ao6Qmmsk9eDylZsyfIWYLACCo/s400-Ic42/mu4e-screenshot.png]]
+
+In the next post, I'll describe how mu4e changed my life and my
+approach to 'Inbox Zero'.
