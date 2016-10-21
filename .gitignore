@@ -9,7 +9,7 @@ output
 plugins
 __pycache__
 README.txt
-state.data.json
+state_data.json
 stories
 templates
 themes
