@@ -3,8 +3,8 @@
 .. title: extending Bash history
 .. slug: extending-bash-history
 .. date: 2016-08-27 14:26
-.. tags: emacs bash history
-.. category: emacs
+.. tags:
+.. category: linux
 .. link:
 .. description: extend bash command history
 .. type: text
