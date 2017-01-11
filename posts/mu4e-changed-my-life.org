@@ -2,8 +2,8 @@
 .. title: how mu4e changed my life
 .. slug: mu4e-changed-my-life
 .. date: 2016-03-23 11:57:11
-.. tags:
-.. category:
+.. tags: mu4e
+.. category: emacs
 .. link:
 .. description:
 .. type: text
