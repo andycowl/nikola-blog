@@ -3,7 +3,7 @@
 .. slug: code-highlight-example
 .. date: 2016-04-01 12:51:22 UTC+01:00
 .. tags:
-.. category:
+.. category: python
 .. link:
 .. description:
 .. type: text
