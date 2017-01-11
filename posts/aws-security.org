@@ -3,7 +3,7 @@
 .. slug: aws-security
 .. date: 2016-03-09 11:02
 .. tags:
-.. category:
+.. category: amazon
 .. link:
 .. description:
 .. type: text
@@ -24,7 +24,7 @@ text'.
 #+END_QUOTE
 
 So, I duly added 's3website.yml' to .gitignore and pushed to GitHub. I
-wasn't sure whether this file exlcusion only took effect from now so I
+wasn't sure whether this file exclusion only took effect from now so I
 checked if the file was still in the repository. Unsurprisingly, it
 was but GitHub provided detailed [[https://help.github.com/articles/remove-sensitive-data/][instructions]] on how to resolve this.
 
