@@ -2,8 +2,8 @@
 .. title: from Thunderbird to mu4e
 .. slug: thunderbird-to-mu4e
 .. date: 2016-03-16 15:52
-.. tags:
-.. category:
+.. tags: thunderbird,mu4e
+.. category: linux
 .. link:
 .. description:
 .. type: text
