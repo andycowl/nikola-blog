@@ -3,8 +3,8 @@
 .. title: adventures with FreeNAS
 .. slug: adventures-with-freenas
 .. date: 2016-06-24 12:07
-.. tags:
-.. category:
+.. tags: freenas
+.. category: linux
 .. link:
 .. description:
 .. type: text
