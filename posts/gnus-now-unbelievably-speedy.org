@@ -1,0 +1,115 @@
+#+BEGIN_COMMENT
+.. title: Gnus now unbelievably speedy
+.. slug: gnus-now-unbelievably-speedy
+.. date: 2017-01-13 13:10:30 UTC
+.. tags: gnus,email,rss,news
+.. category: emacs
+.. link:
+.. description: how to read mail, news, RSS and blogs using Gnus
+.. type: text
+#+END_COMMENT
+
+When I initially revisited Emacs, I used [[http://www.yakshaving.co.uk/posts/thunderbird-to-mu4e/][mu4e]] (instead of Thunderbird)
+for my email.
+
+I used the wonderful [[http://gmane.org/about/][Gmane]] service to read mailing lists in Gnus and
+[[https://github.com/skeeto/elfeed][Elfeed]] to read blogs and RSS feeds within Emacs.
+
+This worked fine but after a while it became a little tiresome having
+to remember different key bindings to essentially perform the same
+repetitive tasks; reading messages, navigating (next/previous)
+messages, moving messages, saving messages, marking messages, deleting
+messages, searching messages, forwarding messages, replying to
+messages and occasionally composing brand new messages.
+
+The solution was blindingly obvious. Just use Gnus for everything
+involving a 'message' instead of three separate packages. One set of
+key bindings to learn and master and Gnus has comprehensive
+functionality. Less is more.
+
+Converting all my email processing to Gnus was easy enough to address
+as I previously used Gnus to handle my email and Gnus natively
+supports the maildir format.
+
+Accessing mail was fast as I had already invested in establishing a
+Dovecot mail server and transferred messages from the corporate IMAP
+server to local Maildir directories (using [[http://pyropus.ca/software/getmail/][getmail]]).
+
+To replace Elfeed for reading RSS subscriptions, Gnus offers a nnrss
+back end but it was so slow and sequential, it was virtually
+unusable. Investigations revealed another option. Lars doesn't like
+anything that is slow and sequential so years ago, he created the
+[[http://gwene.org/][Gwene]] (Gnus Web to Newsgroups) service which took any RSS or Atom feed
+and converted it to a pseudo newsgroup on the Gwene news server.
+
+Gwene already carries a lot of popular blogs and feeds and if your
+esoteric favourite blog isn't present, you can simply add it and the
+content appears immediately.
+
+I was about to celebrate and put the kettle on when, suddenly,
+unexpectedly and rather inconveniently, Lars decided to [[https://lars.ingebrigtsen.no/2016/07/28/the-end-of-gmane/][shutdown]] the
+freely available Gmane (and Gwene) services for understandable reasons
+(idiots launching DDOS attacks on the servers, threat of legal
+action).
+
+I then researched alternative methods and experimented with a number
+of RSS to mail gateways. The best one was [[http://user42.tuxfamily.org/rss2leafnode/index.html][rss2leafnode]] which takes a
+list of blog subscriptions and periodically fed the content into a
+local NNTP news server - [[http://krusty.dt.e-technik.tu-dortmund.de/~ma/leafnode/beta/][leafnode]].
+
+This solution worked well as I was now using Gnus to read email,
+mailing lists, newsgroups, blogs and RSS feeds.
+
+Perfect - well almost. One of the advantages of mu4e (and notmuch) is
+the lightning fast search and powerful abilities. In Gnus, you are
+able to limit lists of articles by author, subject and marks and use
+IMAP search functionality.
+
+However, I regularly used combinations of search terms and full text
+search on the message body. For example, display all messages from
+Peter to the 'Footy' mailing list in 2016 where he mentions
+'Basingstoke'. In mu4e, this search is done using a query
+
+#+BEGIN_SRC sh
+    'from:peter to:footy date:20160101..20161231 basingstoke'
+#+END_SRC
+
+I have always tended to use hierarchical directories and mail folders
+so my mail is archived by year. Gnus could also limit a search by
+author and full text search can be done using the 'nnir' engine so
+this type of search is possible in Gnus but unwieldly.
+
+Combinations of multiple search terms were slightly more problematic
+but as I was already running a local mail server (Dovecot), I decided
+to use [[http://lucene.apache.org/solr/][Solr]] to implement more flexible searching in my mail folders.
+
+Occasionally, I want to search for a message and I have no clue who
+sent it or when so I need to search all email messages in all folders
+for 'cobain conspiracy'. This is easy in Thunderbird and I found the
+best way to achieve this was to create Dovecot virtual folders for
+'All Mail' and 'Sent Mail' that spanned all messages regrdless of
+date. Virtual folders can also be used to implement mu4e's builtin
+queries for 'Last 90 days'.
+
+Why is Gnus unbelievably speedy ? Everything is local.
+
+- No need for a direct IMAP connection.
+- All email periodically delivered to local folders accessed via
+  Dovecot.
+- Message filtering and spam handling performed by Dovecot/Sieve prior
+  to delivery.
+- Solr maintains search indexes of email transparently.
+- Mailing lists and RSS feeds updated automatically by Gmane/Gwene.
+- Virtual folders automatically maintained by Dovecot.
+- Gnus is simply the most fantastic piece of software.
+
+My only reservations were that the number of Linux packages to be
+installed, configured and updated but thankfully, in September 2016,
+new [[http://home.gmane.org/][owners]] stepped forward to resurrect the invaluable Gmane and Gwene
+services so I was able to dispense with Leafnode.
+
+The only prolonged, expensive network access involved here is fetching
+articles from the Gmane and Gwene servers but this has proved so fast
+and reliable that I didn't need to pursue the option of mirroring this
+small number of feeds locally in leafnode (although, undoubtedly, that
+would have been an interesting and fun exercise).
